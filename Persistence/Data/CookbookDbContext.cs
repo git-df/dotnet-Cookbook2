@@ -1,25 +1,26 @@
 ﻿using Domain.Entities;
+using Domain.Entities.Common;
 using Domain.Entities.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Persistence.Seeds;
 
 namespace Persistence.Data
 {
-    public class CookbookDbContext(DbContextOptions<CookbookDbContext> options) :
-        IdentityDbContext<User, IdentityRole<Guid>, Guid>(options)
+    public class CookbookDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
-        public DbSet<User> Users { get; set; }
+        public CookbookDbContext(DbContextOptions<CookbookDbContext> options) : base(options)
+        {
+        }
+
+        override public DbSet<User> Users { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Rate> Rates { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<StarredCategory> StarredCategories { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
@@ -40,13 +41,25 @@ namespace Persistence.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
             base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new CommentConfiguration());
+            builder.ApplyConfiguration(new ProductConfiguration());
             builder.ApplyConfiguration(new RateConfiguration());
             builder.ApplyConfiguration(new RecipeConfiguration());
-            builder.ApplyConfiguration(new ProductConfiguration());
+            builder.ApplyConfiguration(new StarredCategoryConfiguration());
+
+            var roles = IdentitySeed.GetRolesSeed();
+            var adminUser = IdentitySeed.GetAdminUserSeed();
+            var adminRoles = IdentitySeed.GetAdminUserRolesSeed();
+            var categories = CategorySeed.GetSeed();
+
+            builder.Entity<IdentityRole<Guid>>().HasData(roles);
+            builder.Entity<User>().HasData(adminUser);
+            builder.Entity<IdentityUserRole<Guid>>().HasData(adminRoles);
+            builder.Entity<Category>().HasData(categories);
         }
     }
 }

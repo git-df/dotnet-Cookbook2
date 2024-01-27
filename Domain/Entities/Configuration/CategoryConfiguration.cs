@@ -1,25 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Domain.Entities.Configuration
 {
     public class CategoryConfiguration : BaseConfiguration<Category>
     {
+        public const int NameLength = 20;
+
         public override void Configuration(ref EntityTypeBuilder<Category> builder)
         {
             builder.Property(x => x.Name)
                 .IsRequired()
-                .HasMaxLength(CategoryConsts.NameLength);
+                .HasMaxLength(NameLength);
         }
-    }
-
-    public static class CategoryConsts
-    {
-        public const int NameLength = 20;
     }
 }

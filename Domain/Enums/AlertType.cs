@@ -1,14 +1,15 @@
-﻿using Domain.Entities.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain
+namespace Domain.Enums
 {
-    public class Consts
+    public enum AlertType
     {
-
+        Success,
+        Warning,
+        Error
     }
 }

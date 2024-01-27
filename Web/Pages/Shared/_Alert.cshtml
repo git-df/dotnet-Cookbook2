@@ -1,0 +1,24 @@
+﻿@using Application.Helpers
+@using Domain.Enums
+
+@{
+    var alert = TempData["Alert"]?.FromTempData();
+
+    if (alert is not null)
+    {
+        var alertClass = alert.Type switch
+        {
+            AlertType.Success => "alert-success",
+            AlertType.Warning => "alert-warning",
+            AlertType.Error => "alert-danger",
+            _ => ""
+        };
+
+        <div class="fixed-bottom mb-1 me-3">
+            <div class="alert @alertClass alert-dismissible fade show float-end" role="alert">
+                @Html.Raw(alert.Message)
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    }
+}

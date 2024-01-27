@@ -12,7 +12,7 @@ using Persistence.Data;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(CookbookDbContext))]
-    [Migration("20240126191947_Init")]
+    [Migration("20240211110835_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -36,17 +36,11 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -56,6 +50,78 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Created = new DateTime(2024, 2, 11, 12, 8, 31, 626, DateTimeKind.Local).AddTicks(790),
+                            Deleted = false,
+                            Name = "Breakfasts"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Created = new DateTime(2024, 2, 11, 12, 8, 31, 626, DateTimeKind.Local).AddTicks(846),
+                            Deleted = false,
+                            Name = "Lunches"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Created = new DateTime(2024, 2, 11, 12, 8, 31, 626, DateTimeKind.Local).AddTicks(849),
+                            Deleted = false,
+                            Name = "Dinners"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Created = new DateTime(2024, 2, 11, 12, 8, 31, 626, DateTimeKind.Local).AddTicks(851),
+                            Deleted = false,
+                            Name = "Desserts"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Created = new DateTime(2024, 2, 11, 12, 8, 31, 626, DateTimeKind.Local).AddTicks(852),
+                            Deleted = false,
+                            Name = "Snacks"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Created = new DateTime(2024, 2, 11, 12, 8, 31, 626, DateTimeKind.Local).AddTicks(854),
+                            Deleted = false,
+                            Name = "Drinks"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Created = new DateTime(2024, 2, 11, 12, 8, 31, 626, DateTimeKind.Local).AddTicks(856),
+                            Deleted = false,
+                            Name = "Vegetarian"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Created = new DateTime(2024, 2, 11, 12, 8, 31, 626, DateTimeKind.Local).AddTicks(857),
+                            Deleted = false,
+                            Name = "Vegan"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Created = new DateTime(2024, 2, 11, 12, 8, 31, 626, DateTimeKind.Local).AddTicks(859),
+                            Deleted = false,
+                            Name = "Gluten-Free"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Created = new DateTime(2024, 2, 11, 12, 8, 31, 626, DateTimeKind.Local).AddTicks(860),
+                            Deleted = false,
+                            Name = "Quick and Easy"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Comment", b =>
@@ -74,17 +140,11 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RecipeId")
                         .HasColumnType("int");
@@ -117,17 +177,11 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -155,17 +209,11 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RecipeId")
                         .HasColumnType("int");
@@ -202,9 +250,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
@@ -213,11 +258,11 @@ namespace Persistence.Migrations
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -239,6 +284,38 @@ namespace Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Recipes");
+                });
+
+            modelBuilder.Entity("Domain.Entities.StarredCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("StarredCategories");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -317,6 +394,27 @@ namespace Persistence.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a2eea53e-a50e-4c60-98b4-1fcafab821ed"),
+                            AccessFailedCount = 0,
+                            Blocked = false,
+                            BlockedComments = false,
+                            ConcurrencyStamp = "00a682b7-85db-40b3-badb-5dc6f6d136e5",
+                            Email = "sa@sa.sa",
+                            EmailConfirmed = false,
+                            FirstName = "sa",
+                            LastName = "sa",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SA@SA.SA",
+                            NormalizedUserName = "SA@SA.SA",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHVSQlDIk2DSOY/QR6fQ9V2Hlwht61/H6aGCQH90iToFWqpmhBFdqgzaK7BX4QsN1w==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "sa"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -345,6 +443,29 @@ namespace Persistence.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f6f6c492-1aa4-46d6-80b9-3225f3953931"),
+                            ConcurrencyStamp = "f6f6c492-1aa4-46d6-80b9-3225f3953931",
+                            Name = "user",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = new Guid("86faf7ea-e31e-4c57-8207-8bfd21214318"),
+                            ConcurrencyStamp = "86faf7ea-e31e-4c57-8207-8bfd21214318",
+                            Name = "creator",
+                            NormalizedName = "CREATOR"
+                        },
+                        new
+                        {
+                            Id = new Guid("606eb50a-32d2-4e7a-8378-3cdb1905c447"),
+                            ConcurrencyStamp = "606eb50a-32d2-4e7a-8378-3cdb1905c447",
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -429,6 +550,23 @@ namespace Persistence.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("a2eea53e-a50e-4c60-98b4-1fcafab821ed"),
+                            RoleId = new Guid("f6f6c492-1aa4-46d6-80b9-3225f3953931")
+                        },
+                        new
+                        {
+                            UserId = new Guid("a2eea53e-a50e-4c60-98b4-1fcafab821ed"),
+                            RoleId = new Guid("86faf7ea-e31e-4c57-8207-8bfd21214318")
+                        },
+                        new
+                        {
+                            UserId = new Guid("a2eea53e-a50e-4c60-98b4-1fcafab821ed"),
+                            RoleId = new Guid("606eb50a-32d2-4e7a-8378-3cdb1905c447")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -459,7 +597,7 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -489,7 +627,7 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Rates")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -508,7 +646,26 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Recipes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Entities.StarredCategory", b =>
+                {
+                    b.HasOne("Domain.Entities.Category", "Category")
+                        .WithMany("StarredCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithMany("StarredCategories")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -572,6 +729,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Category", b =>
                 {
                     b.Navigation("Recipes");
+
+                    b.Navigation("StarredCategories");
                 });
 
             modelBuilder.Entity("Domain.Entities.Recipe", b =>
@@ -581,6 +740,17 @@ namespace Persistence.Migrations
                     b.Navigation("Products");
 
                     b.Navigation("Rates");
+                });
+
+            modelBuilder.Entity("Domain.Entities.User", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Rates");
+
+                    b.Navigation("Recipes");
+
+                    b.Navigation("StarredCategories");
                 });
 #pragma warning restore 612, 618
         }

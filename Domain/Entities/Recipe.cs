@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Domain.Entities.Common;
 
 namespace Domain.Entities
 {
@@ -12,6 +9,7 @@ namespace Domain.Entities
         public string Short { get; set; }
         public string Description { get; set; }
         public TimeSpan CookingTime { get; set; }
+        public string ImageUrl { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Rate> Rates { get; set; }

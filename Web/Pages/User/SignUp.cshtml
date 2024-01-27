@@ -1,0 +1,52 @@
+﻿@page
+@using Web.Pages.Shared
+@model Web.Pages.User.SignUpModel
+@{
+}
+
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6 bg-black p-5 mt-5 bg-opacity-10 rounded">
+
+            <h1 class="mb-3 h3">Sign Up</h1>
+
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label" for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" asp-for="SignUpCommand.FirstName" />
+                    <span asp-validation-for="SignUpCommand.FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" asp-for="SignUpCommand.LastName" />
+                    <span asp-validation-for="SignUpCommand.LastName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="text" class="form-control" id="email" asp-for="SignUpCommand.Email" />
+                    <span asp-validation-for="SignUpCommand.Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" class="form-control" id="password" asp-for="SignUpCommand.Password" />
+                    <span asp-validation-for="SignUpCommand.Password" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="confirmPassword">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" asp-for="SignUpCommand.ConfirmPassword" />
+                    <span asp-validation-for="SignUpCommand.ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <partial name="_LoadingButton" model="@(new LoadingButton("Sign Up", "btn btn-secondary"))" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

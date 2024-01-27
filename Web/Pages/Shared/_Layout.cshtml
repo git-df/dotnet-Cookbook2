@@ -3,45 +3,62 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Web</title>
+    <title>@ViewData["Title"] - Cookbook</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
+<body class="bg-dark text-light">
+    <partial name="_Alert" />
+    <nav class="navbar navbar-dark text-start">
+        <div class="container">
+            <div class="row text-center w-100">
+                <div class="col-4 navbar-brand m-0"><a asp-page="@PageConsts.Index" class="btn btn-dark">Cookbook</a></div>
+                <div class="col-4 navbar-brand m-0"><a asp-page="@PageConsts.Index" class="btn btn-dark bi bi-book-half"></a></div>
+                @if (user.IsAuthenticated)
+                {
+                    <div class="col-4">
+                        <button href="#" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#userModal">@user.FullName</button>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-4">
+                        <a asp-page="@PageConsts.UserSignIn" class="btn btn-dark">Sign In</a> /
+                        <a asp-page="@PageConsts.UserSignUp" class="btn btn-dark">Sign Up</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        @RenderBody()
+    </main>
+
+    <!-- User Modal -->
+    <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-light w-50 mx-auto">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="userModalLabel">User options</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <a class="btn btn-secondary w-100 mb-2">Option 1</a>
+                    <a class="btn btn-secondary w-100 mb-2">Option 2</a>
+                    <a class="btn btn-secondary w-100 mb-2">Option 3</a>
+                    <a asp-page="@PageConsts.UserSignOut" class="btn btn-danger w-100">Sign Out</a>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
-
+    <partial name="_LoadingModal" />
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

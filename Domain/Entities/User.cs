@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
@@ -14,5 +9,9 @@ namespace Domain.Entities
         public string LastName { get; set; }
         public bool Blocked { get; set; } = false;
         public bool BlockedComments { get; set; } = false;
+        public virtual ICollection<Recipe> Recipes { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Rate> Rates { get; set; }
+        public virtual ICollection<StarredCategory> StarredCategories { get; set; }
     }
 }

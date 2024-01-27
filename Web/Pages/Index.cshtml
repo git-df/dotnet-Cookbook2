@@ -1,10 +1,108 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Index";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Unleash Your Inner Chef!</h1>
+            <p class="lead text-body-secondary">Explore a universe of flavors and easy-to-follow recipes that will transform your meals into culinary masterpieces. Join our community and start your journey to becoming a kitchen wizard today.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+
+    <div class="py-3">
+        @if (Model.Categories.Count > 0)
+        {
+            <div class="text-center d-flex flex-wrap justify-content-center">
+                @foreach (var category in Model.Categories)
+                {
+                    <div class="btn-secondary border-0 position-relative m-2 px-2 rounded-pill">
+                        <a asp-route-categoryId="@category.Id" class="text-light text-decoration-none">@category.Name - @category.RecipesCount</a>
+                        @if (@category.Starred == true)
+                        {
+                            <a asp-page-handler="RemoveStarredCategory" asp-route-id="@category.Id" class="position-absolute top-0 start-100 translate-middle rounded-circle bi bi-star-fill text-warning"></a>
+                        }
+                        else if (@category.Starred == false)
+                        {
+                            <a asp-page-handler="AddStarredCategory" asp-route-id="@category.Id" class="position-absolute top-0 start-100 translate-middle rounded-circle bi bi-star text-warning"></a>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <div class="py-3 d-flex justify-content-between">
+        <div class="px-2 d-flex flex-nowrap">
+            <button href="#" class="btn btn-secondary rounded-circle bi bi-arrow-down-up me-2" data-bs-toggle="modal" data-bs-target="#sortModal"></button>
+            <button href="#" class="btn btn-secondary rounded-circle bi bi-funnel me-2" data-bs-toggle="modal" data-bs-target="#filterModal"></button>
+            <button href="#" class="btn btn-secondary rounded-circle" data-bs-toggle="modal" data-bs-target="#paginationModal">12</button>
+        </div>
+        <div class="px-2 d-flex flex-nowrap">
+            <input type="text" class="form-control rounded-pill bg-secondary text-light border-0 me-2" id="phrase">
+            <button href="#" class="btn btn-secondary rounded-circle bi bi-search"></button>
+        </div>
+    </div>
+</section>
+
+<!-- Sorting Modal -->
+<div class="modal fade" id="sortModal" tabindex="-1" aria-labelledby="sortModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light w-50 mx-auto">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="sortModalLabel">Sorting options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filtering Modal -->
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light w-50 mx-auto">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="filterModalLabel">Filtering options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pagination Modal -->
+<div class="modal fade" id="paginationModal" tabindex="-1" aria-labelledby="paginationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light w-50 mx-auto">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="paginationModalLabel">Pagination options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="list-group list-group-horizontal justify-content-center">
+                <button class="list-group-item bg-secondary text-light">12</button>
+                <button class="list-group-item bg-secondary text-light">24</button>
+                <button class="list-group-item bg-secondary text-light">36</button>
+                <button class="list-group-item bg-secondary text-light">48</button>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
